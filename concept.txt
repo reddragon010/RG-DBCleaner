@@ -1,0 +1,141 @@
+/* ******************************* */
+/*  Elevims & Robigos DB optimize */
+/* ******************************* */
+
+
+
+// Acc , welche zu löschen sind, heraussuchen
+
+// Wichtig: Acc, die savebann haben NICHT löschen!
+
+std::list<uint64> accountIDList;
+
+void SelectAccounts()
+{
+    accountIDList.clear();
+
+    while accountGUID = (s.Query = "SELECT `id` FROM `logon` WHERE `joindate` < @joindate AND `last_login` = @lastlogin;")
+        accountIDList.push_back(accountGUID);
+
+    DeleteLogonAccounts(accountIDList);
+    SelectCharacters(accountIDList);
+    DeleteAccountCrapCharDB(accountIDList);
+}
+
+void DeleteLogonAccounts(accountIDList)
+{
+    if (accountIDList.empty())
+        return;
+
+    for (std::list<uint64>::const_iterator itr = accountIDList.begin(); itr != accountIDList.end(); ++itr)
+    {
+        s.Query = "DELETE FROM `account` WHERE `id`= itr;"
+        s.Query = "DELETE FROM `account_access` WHERE `id`= itr;"
+        s.Query = "DELETE FROM `account_banned` WHERE `id`= itr;"
+        s.Query = "DELETE FROM `realmcharacters` WHERE `acctid`= itr;"
+    }
+}
+
+void DeleteAccountCrapCharDB(accountIDList)
+{
+    if (accountIDList.empty())
+        return;
+
+    for (std::list<uint64>::const_iterator itr = accountIDList.begin(); itr != accountIDList.end(); ++itr)
+    {
+        s.Query = "DELETE FROM `account_data` WHERE `id`= itr;"
+        s.Query = "DELETE FROM `account_instance_times` WHERE `id`= itr;"
+        s.Query = "DELETE FROM `account_tutorial` WHERE `id`= itr;"
+    }
+}
+
+std::list<uint64> characterIDList;
+
+void SelectCharacters(accountIDList)
+{
+    characterIDList.clear();
+
+    if (accountIDList.empty())
+        return;
+
+    for (std::list<uint64>::const_iterator itr = accountIDList.begin(); itr != accountIDList.end(); ++itr)
+    {
+        while characterGUID = (s.Query = "SELECT `guid` FROM `characters` WHERE `account` = itr;")
+            characterIDList.push_back(characterGUID);
+    }
+
+    DeleteallPets(characterGUID);
+    DeleteallCharacterCrap(characterGUID);
+}
+
+void DeleteallPets(characterGUID)
+{
+    if (characterGUID.empty())
+        return;
+
+    for (std::list<uint64>::const_iterator itr = characterGUID.begin(); itr != characterGUID.end(); ++itr)
+    {
+        while petGUID = (s.Query = "SELECT `id` FROM `character_pet` WHERE `owner` = itr;")
+        {
+            s.Query = "DELETE FROM `character_pet` WHERE `id`= petGUID;"
+            s.Query = "DELETE FROM `pet_aura` WHERE `guid`= petGUID;"
+            s.Query = "DELETE FROM `pet_spell` WHERE `guid`= petGUID;"
+            s.Query = "DELETE FROM `pet_spell_cooldown` WHERE `guid`= petGUID;"
+        }
+    }
+}
+
+
+void DeleteallCharacterCrap(characterGUID)
+{
+    if (characterGUID.empty())
+        return;
+
+    for (std::list<uint64>::const_iterator itr = characterGUID.begin(); itr != characterGUID.end(); ++itr)
+    {
+        s.Query = "DELETE FROM `arena_team_member` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `auctionhouse` WHERE `auctioneerguid`= itr;"
+        s.Query = "DELETE FROM `character_account_data` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_achievement` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_achievement_progress` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_action` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_arena_stats` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_aura` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_banned` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_battleground_data` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_battleground_random` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_equipmentsets` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_gifts` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_glyphs` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_homebind` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_instance` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_inventory` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_questatus` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_questatus_daily` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_questatus_rewarded` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_questatus_weekly` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_reputation` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_skills` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_social` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_spell` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_spell_cooldown` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_stats` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `character_talent` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `characters` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `corpse` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `gm_tickets` WHERE `guid`= itr;"
+        s.Query = "DELETE FROM `group_member` WHERE `memberGuid`= itr;"
+        s.Query = "DELETE FROM `groups` WHERE `leaderGuid`= itr;"
+        s.Query = "DELETE FROM `item_instance` WHERE `owner_guid`= itr;"
+        s.Query = "DELETE FROM `item_refund_instance` WHERE `player_guid`= itr;"
+        s.Query = "DELETE FROM `mail` WHERE `receiver`= itr;"
+        s.Query = "DELETE FROM `mail_items` WHERE `receiver`= itr;"
+        s.Query = "DELETE FROM `petition` WHERE `ownerguid`= itr;"
+        s.Query = "DELETE FROM `petition_sign` WHERE `ownerguid`= itr;"
+        s.Query = "DELETE FROM `rg_characters_data` WHERE `guid`= itr;"
+    }
+}
+
+
+
+
